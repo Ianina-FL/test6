@@ -33,7 +33,9 @@ const EventsTablesPage = () => {
 
     { label: 'StartDate', title: 'start_date', date: 'true' },
     { label: 'EndDate', title: 'end_date', date: 'true' },
+
     { label: 'Venue', title: 'venue' },
+
     { label: 'Guests', title: 'guests' },
     { label: 'Vendors', title: 'vendors' },
   ]);

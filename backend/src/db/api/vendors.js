@@ -269,7 +269,6 @@ module.exports = class VendorsDBApi {
       ? {
           rows: [],
           count: await db.vendors.count({
-            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -283,7 +282,6 @@ module.exports = class VendorsDBApi {
           }),
         }
       : await db.vendors.findAndCountAll({
-          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -295,11 +293,6 @@ module.exports = class VendorsDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
-
-    //    rows = await this._fillWithRelationsAndFilesForRows(
-    //      rows,
-    //      options,
-    //    );
 
     return { rows, count };
   }

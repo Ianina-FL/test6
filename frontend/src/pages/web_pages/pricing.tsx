@@ -200,7 +200,7 @@ export default function WebSite() {
         <FeaturesSection
           projectName={'test6'}
           image={['Efficient event planning tools']}
-          withBg={1}
+          withBg={0}
           features={features_points}
           mainText={`Explore ${projectName} Key Features`}
           subTitle={`Unlock the full potential of your events with ${projectName}. Our features are designed to simplify and streamline every aspect of your event.`}

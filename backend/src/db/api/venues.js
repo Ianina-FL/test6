@@ -20,6 +20,7 @@ module.exports = class VenuesDBApi {
         capacity: data.capacity || null,
         is_booked: data.is_booked || false,
 
+        address: data.address || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -47,6 +48,7 @@ module.exports = class VenuesDBApi {
       capacity: item.capacity || null,
       is_booked: item.is_booked || false,
 
+      address: item.address || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -75,6 +77,7 @@ module.exports = class VenuesDBApi {
         capacity: data.capacity || null,
         is_booked: data.is_booked || false,
 
+        address: data.address || null,
         updatedById: currentUser.id,
       },
       { transaction },
@@ -199,6 +202,13 @@ module.exports = class VenuesDBApi {
         };
       }
 
+      if (filter.address) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('venues', 'address', filter.address),
+        };
+      }
+
       if (filter.capacityRange) {
         const [start, end] = filter.capacityRange;
 
@@ -286,7 +296,6 @@ module.exports = class VenuesDBApi {
       ? {
           rows: [],
           count: await db.venues.count({
-            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -300,7 +309,6 @@ module.exports = class VenuesDBApi {
           }),
         }
       : await db.venues.findAndCountAll({
-          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -312,11 +320,6 @@ module.exports = class VenuesDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
-
-    //    rows = await this._fillWithRelationsAndFilesForRows(
-    //      rows,
-    //      options,
-    //    );
 
     return { rows, count };
   }

@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 import Head from 'next/head';
+import 'react-toastify/dist/ReactToastify.min.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import dayjs from 'dayjs';
@@ -84,6 +85,11 @@ const VenuesView = () => {
               <p>{venues?.organization?.name ?? 'No data'}</p>
             </div>
           )}
+
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Address</p>
+            <p>{venues?.address}</p>
+          </div>
 
           <>
             <p className={'block font-bold mb-2'}>Events Venue</p>

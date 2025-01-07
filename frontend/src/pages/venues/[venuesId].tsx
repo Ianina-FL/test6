@@ -1,6 +1,7 @@
 import { mdiChartTimelineVariant, mdiUpload } from '@mdi/js';
 import Head from 'next/head';
 import React, { ReactElement, useEffect, useState } from 'react';
+import 'react-toastify/dist/ReactToastify.min.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import dayjs from 'dayjs';
@@ -47,6 +48,8 @@ const EditVenues = () => {
     is_booked: false,
 
     organization: '',
+
+    address: '',
   };
   const [initialValues, setInitialValues] = useState(initVals);
 
@@ -135,6 +138,10 @@ const EditVenues = () => {
                   ></Field>
                 </FormField>
               )}
+
+              <FormField label='Address'>
+                <Field name='address' placeholder='Address' />
+              </FormField>
 
               <BaseDivider />
               <BaseButtons>

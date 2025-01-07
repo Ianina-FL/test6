@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 import Head from 'next/head';
+import 'react-toastify/dist/ReactToastify.min.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import dayjs from 'dayjs';
@@ -309,6 +310,8 @@ const OrganizationsView = () => {
                       <th>Capacity</th>
 
                       <th>IsBooked</th>
+
+                      <th>Address</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -330,6 +333,8 @@ const OrganizationsView = () => {
                           <td data-label='is_booked'>
                             {dataFormatter.booleanFormatter(item.is_booked)}
                           </td>
+
+                          <td data-label='address'>{item.address}</td>
                         </tr>
                       ))}
                   </tbody>

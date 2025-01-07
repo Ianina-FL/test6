@@ -6,6 +6,7 @@ import {
 } from '@mdi/js';
 import Head from 'next/head';
 import React, { ReactElement } from 'react';
+import 'react-toastify/dist/ReactToastify.min.css';
 import CardBox from '../../components/CardBox';
 import LayoutAuthenticated from '../../layouts/Authenticated';
 import SectionMain from '../../components/SectionMain';
@@ -42,6 +43,8 @@ const initialValues = {
   is_booked: false,
 
   organization: '',
+
+  address: '',
 };
 
 const VenuesNew = () => {
@@ -99,6 +102,10 @@ const VenuesNew = () => {
                   options={[]}
                   itemRef={'organizations'}
                 ></Field>
+              </FormField>
+
+              <FormField label='Address'>
+                <Field name='address' placeholder='Address' />
               </FormField>
 
               <BaseDivider />

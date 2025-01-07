@@ -299,6 +299,27 @@ module.exports = class UsersDBApi {
       {
         model: db.roles,
         as: 'app_role',
+
+        where: filter.app_role
+          ? {
+              [Op.or]: [
+                {
+                  id: {
+                    [Op.in]: filter.app_role
+                      .split('|')
+                      .map((term) => Utils.uuid(term)),
+                  },
+                },
+                {
+                  name: {
+                    [Op.or]: filter.app_role
+                      .split('|')
+                      .map((term) => ({ [Op.iLike]: `%${term}%` })),
+                  },
+                },
+              ],
+            }
+          : {},
       },
 
       {
@@ -309,16 +330,6 @@ module.exports = class UsersDBApi {
       {
         model: db.permissions,
         as: 'custom_permissions',
-        through: filter.custom_permissions
-          ? {
-              where: {
-                [Op.or]: filter.custom_permissions.split('|').map((item) => {
-                  return { ['Id']: Utils.uuid(item) };
-                }),
-              },
-            }
-          : null,
-        required: filter.custom_permissions ? true : null,
       },
 
       {
@@ -473,17 +484,6 @@ module.exports = class UsersDBApi {
         };
       }
 
-      if (filter.app_role) {
-        const listItems = filter.app_role.split('|').map((item) => {
-          return Utils.uuid(item);
-        });
-
-        where = {
-          ...where,
-          app_roleId: { [Op.or]: listItems },
-        };
-      }
-
       if (filter.organization) {
         const listItems = filter.organization.split('|').map((item) => {
           return Utils.uuid(item);
@@ -493,6 +493,38 @@ module.exports = class UsersDBApi {
           ...where,
           organizationId: { [Op.or]: listItems },
         };
+      }
+
+      if (filter.custom_permissions) {
+        const searchTerms = filter.custom_permissions.split('|');
+
+        include = [
+          {
+            model: db.permissions,
+            as: 'custom_permissions_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        name: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
       }
 
       if (filter.createdAtRange) {
@@ -528,7 +560,6 @@ module.exports = class UsersDBApi {
       ? {
           rows: [],
           count: await db.users.count({
-            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -542,7 +573,6 @@ module.exports = class UsersDBApi {
           }),
         }
       : await db.users.findAndCountAll({
-          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -554,11 +584,6 @@ module.exports = class UsersDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
-
-    //    rows = await this._fillWithRelationsAndFilesForRows(
-    //      rows,
-    //      options,
-    //    );
 
     return { rows, count };
   }

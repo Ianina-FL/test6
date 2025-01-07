@@ -33,6 +33,10 @@ module.exports = function (sequelize, DataTypes) {
         defaultValue: false,
       },
 
+      address: {
+        type: DataTypes.TEXT,
+      },
+
       importHash: {
         type: DataTypes.STRING(255),
         allowNull: true,

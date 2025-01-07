@@ -170,16 +170,6 @@ module.exports = class RolesDBApi {
       {
         model: db.permissions,
         as: 'permissions',
-        through: filter.permissions
-          ? {
-              where: {
-                [Op.or]: filter.permissions.split('|').map((item) => {
-                  return { ['Id']: Utils.uuid(item) };
-                }),
-              },
-            }
-          : null,
-        required: filter.permissions ? true : null,
       },
     ];
 
@@ -228,6 +218,38 @@ module.exports = class RolesDBApi {
         };
       }
 
+      if (filter.permissions) {
+        const searchTerms = filter.permissions.split('|');
+
+        include = [
+          {
+            model: db.permissions,
+            as: 'permissions_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        name: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
+      }
+
       if (filter.createdAtRange) {
         const [start, end] = filter.createdAtRange;
 
@@ -262,7 +284,6 @@ module.exports = class RolesDBApi {
           rows: [],
           count: await db.roles.count({
             where,
-            where,
             include,
             distinct: true,
             limit: limit ? Number(limit) : undefined,
@@ -276,7 +297,6 @@ module.exports = class RolesDBApi {
         }
       : await db.roles.findAndCountAll({
           where,
-          where,
           include,
           distinct: true,
           limit: limit ? Number(limit) : undefined,
@@ -287,11 +307,6 @@ module.exports = class RolesDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
-
-    //    rows = await this._fillWithRelationsAndFilesForRows(
-    //      rows,
-    //      options,
-    //    );
 
     return { rows, count };
   }

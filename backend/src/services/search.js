@@ -49,7 +49,7 @@ module.exports = class SearchService {
 
         vendors: ['name', 'contact_info'],
 
-        venues: ['name', 'location'],
+        venues: ['name', 'location', 'address'],
 
         organizations: ['name'],
       };

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ReactElement } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import Head from 'next/head';
 import CardBox from '../components/CardBox';
 import SectionFullScreen from '../components/SectionFullScreen';

@@ -15,23 +15,11 @@ const Organizations = db.organizations;
 
 const BudgetsData = [
   {
-    total_budget: 43.72,
+    total_budget: 83.66,
 
-    expenses: 39.57,
+    expenses: 43.11,
 
-    income: 39.23,
-
-    // type code here for "relation_many" field
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    total_budget: 75.34,
-
-    expenses: 86.45,
-
-    income: 82.61,
+    income: 86.75,
 
     // type code here for "relation_many" field
 
@@ -39,11 +27,23 @@ const BudgetsData = [
   },
 
   {
-    total_budget: 66.77,
+    total_budget: 56.32,
 
-    expenses: 49.97,
+    expenses: 83.08,
 
-    income: 89.36,
+    income: 54.93,
+
+    // type code here for "relation_many" field
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    total_budget: 20.98,
+
+    expenses: 69.18,
+
+    income: 66.34,
 
     // type code here for "relation_many" field
 
@@ -53,7 +53,7 @@ const BudgetsData = [
 
 const EventsData = [
   {
-    title: 'Jonas Salk',
+    title: 'Anton van Leeuwenhoek',
 
     start_date: new Date(),
 
@@ -69,7 +69,7 @@ const EventsData = [
   },
 
   {
-    title: 'Wilhelm Wundt',
+    title: 'Arthur Eddington',
 
     start_date: new Date(),
 
@@ -85,7 +85,7 @@ const EventsData = [
   },
 
   {
-    title: 'Albrecht von Haller',
+    title: 'B. F. Skinner',
 
     start_date: new Date(),
 
@@ -103,27 +103,27 @@ const EventsData = [
 
 const GuestsData = [
   {
-    name: 'Leonard Euler',
+    name: 'Jean Piaget',
 
     meal_preference: 'Vegan',
 
-    rsvp_status: true,
+    rsvp_status: false,
 
     // type code here for "relation_one" field
   },
 
   {
-    name: 'John Dalton',
+    name: 'Jean Baptiste Lamarck',
 
-    meal_preference: 'Vegetarian',
+    meal_preference: 'Non-Vegetarian',
 
-    rsvp_status: true,
+    rsvp_status: false,
 
     // type code here for "relation_one" field
   },
 
   {
-    name: 'Alfred Kinsey',
+    name: 'Archimedes',
 
     meal_preference: 'Vegan',
 
@@ -135,31 +135,31 @@ const GuestsData = [
 
 const VendorsData = [
   {
-    name: 'Linus Pauling',
+    name: 'Jean Baptiste Lamarck',
 
-    contact_info: 'James Watson',
+    contact_info: 'Willard Libby',
 
-    rating: 21.74,
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    name: 'Claude Bernard',
-
-    contact_info: 'Marie Curie',
-
-    rating: 77.07,
+    rating: 76.17,
 
     // type code here for "relation_one" field
   },
 
   {
-    name: 'George Gaylord Simpson',
+    name: 'Willard Libby',
 
-    contact_info: 'Thomas Hunt Morgan',
+    contact_info: 'Wilhelm Wundt',
 
-    rating: 53.26,
+    rating: 45.81,
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    name: 'Arthur Eddington',
+
+    contact_info: 'Isaac Newton',
+
+    rating: 51.32,
 
     // type code here for "relation_one" field
   },
@@ -167,53 +167,59 @@ const VendorsData = [
 
 const VenuesData = [
   {
-    name: 'Alexander Fleming',
+    name: 'Gregor Mendel',
 
-    location: 'Edwin Hubble',
+    location: 'Max Delbruck',
 
-    capacity: 8,
+    capacity: 5,
 
     is_booked: true,
 
     // type code here for "relation_one" field
+
+    address: 'Jonas Salk',
   },
 
   {
-    name: 'Ernst Haeckel',
+    name: 'Sigmund Freud',
 
-    location: 'Ludwig Boltzmann',
+    location: 'Werner Heisenberg',
 
-    capacity: 4,
+    capacity: 3,
+
+    is_booked: true,
+
+    // type code here for "relation_one" field
+
+    address: 'James Clerk Maxwell',
+  },
+
+  {
+    name: 'Claude Levi-Strauss',
+
+    location: 'Theodosius Dobzhansky',
+
+    capacity: 9,
 
     is_booked: false,
 
     // type code here for "relation_one" field
-  },
 
-  {
-    name: 'Karl Landsteiner',
-
-    location: 'Jonas Salk',
-
-    capacity: 5,
-
-    is_booked: false,
-
-    // type code here for "relation_one" field
+    address: 'Alexander Fleming',
   },
 ];
 
 const OrganizationsData = [
   {
-    name: 'William Harvey',
+    name: 'James Clerk Maxwell',
   },
 
   {
-    name: 'Theodosius Dobzhansky',
+    name: 'Lucretius',
   },
 
   {
-    name: 'Frederick Gowland Hopkins',
+    name: 'Emil Fischer',
   },
 ];
 
