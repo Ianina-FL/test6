@@ -81,6 +81,11 @@ const ListVenues = ({
                       {dataFormatter.booleanFormatter(item.is_booked)}
                     </p>
                   </div>
+
+                  <div className={'flex-1 px-3'}>
+                    <p className={'text-xs   text-gray-500 '}>Address</p>
+                    <p className={'line-clamp-2'}>{item.address}</p>
+                  </div>
                 </div>
                 <ListActionsPopover
                   onDelete={onDelete}

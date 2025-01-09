@@ -85,6 +85,11 @@ const VenuesView = () => {
             </div>
           )}
 
+          <div className={'mb-4'}>
+            <p className={'block font-bold mb-2'}>Address</p>
+            <p>{venues?.address}</p>
+          </div>
+
           <>
             <p className={'block font-bold mb-2'}>Events Venue</p>
             <CardBox

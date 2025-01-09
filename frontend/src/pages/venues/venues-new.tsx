@@ -42,6 +42,8 @@ const initialValues = {
   is_booked: false,
 
   organization: '',
+
+  address: '',
 };
 
 const VenuesNew = () => {
@@ -99,6 +101,10 @@ const VenuesNew = () => {
                   options={[]}
                   itemRef={'organizations'}
                 ></Field>
+              </FormField>
+
+              <FormField label='Address'>
+                <Field name='address' placeholder='Address' />
               </FormField>
 
               <BaseDivider />

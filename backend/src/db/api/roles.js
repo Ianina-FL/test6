@@ -170,16 +170,6 @@ module.exports = class RolesDBApi {
       {
         model: db.permissions,
         as: 'permissions',
-        through: filter.permissions
-          ? {
-              where: {
-                [Op.or]: filter.permissions.split('|').map((item) => {
-                  return { ['Id']: Utils.uuid(item) };
-                }),
-              },
-            }
-          : null,
-        required: filter.permissions ? true : null,
       },
     ];
 
@@ -226,6 +216,38 @@ module.exports = class RolesDBApi {
           ...where,
           globalAccess: filter.globalAccess,
         };
+      }
+
+      if (filter.permissions) {
+        const searchTerms = filter.permissions.split('|');
+
+        include = [
+          {
+            model: db.permissions,
+            as: 'permissions_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        name: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
       }
 
       if (filter.createdAtRange) {

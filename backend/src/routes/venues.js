@@ -28,6 +28,9 @@ router.use(checkCrudPermissions('venues'));
  *          location:
  *            type: string
  *            default: location
+ *          address:
+ *            type: string
+ *            default: address
 
  *          capacity:
  *            type: integer
@@ -309,7 +312,7 @@ router.get(
 
     const payload = await VenuesDBApi.findAll(req.query, globalAccess);
     if (filetype && filetype === 'csv') {
-      const fields = ['id', 'name', 'location', 'capacity'];
+      const fields = ['id', 'name', 'location', 'address', 'capacity'];
       const opts = { fields };
       try {
         const csv = parse(payload.rows, opts);

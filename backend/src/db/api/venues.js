@@ -20,6 +20,7 @@ module.exports = class VenuesDBApi {
         capacity: data.capacity || null,
         is_booked: data.is_booked || false,
 
+        address: data.address || null,
         importHash: data.importHash || null,
         createdById: currentUser.id,
         updatedById: currentUser.id,
@@ -47,6 +48,7 @@ module.exports = class VenuesDBApi {
       capacity: item.capacity || null,
       is_booked: item.is_booked || false,
 
+      address: item.address || null,
       importHash: item.importHash || null,
       createdById: currentUser.id,
       updatedById: currentUser.id,
@@ -75,6 +77,7 @@ module.exports = class VenuesDBApi {
         capacity: data.capacity || null,
         is_booked: data.is_booked || false,
 
+        address: data.address || null,
         updatedById: currentUser.id,
       },
       { transaction },
@@ -196,6 +199,13 @@ module.exports = class VenuesDBApi {
         where = {
           ...where,
           [Op.and]: Utils.ilike('venues', 'location', filter.location),
+        };
+      }
+
+      if (filter.address) {
+        where = {
+          ...where,
+          [Op.and]: Utils.ilike('venues', 'address', filter.address),
         };
       }
 

@@ -181,16 +181,6 @@ module.exports = class BudgetsDBApi {
       {
         model: db.vendors,
         as: 'payments',
-        through: filter.payments
-          ? {
-              where: {
-                [Op.or]: filter.payments.split('|').map((item) => {
-                  return { ['Id']: Utils.uuid(item) };
-                }),
-              },
-            }
-          : null,
-        required: filter.payments ? true : null,
       },
     ];
 
@@ -295,6 +285,38 @@ module.exports = class BudgetsDBApi {
           ...where,
           organizationId: { [Op.or]: listItems },
         };
+      }
+
+      if (filter.payments) {
+        const searchTerms = filter.payments.split('|');
+
+        include = [
+          {
+            model: db.vendors,
+            as: 'payments_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        name: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
       }
 
       if (filter.createdAtRange) {

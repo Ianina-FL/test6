@@ -200,6 +200,27 @@ module.exports = class EventsDBApi {
       {
         model: db.venues,
         as: 'venue',
+
+        where: filter.venue
+          ? {
+              [Op.or]: [
+                {
+                  id: {
+                    [Op.in]: filter.venue
+                      .split('|')
+                      .map((term) => Utils.uuid(term)),
+                  },
+                },
+                {
+                  name: {
+                    [Op.or]: filter.venue
+                      .split('|')
+                      .map((term) => ({ [Op.iLike]: `%${term}%` })),
+                  },
+                },
+              ],
+            }
+          : {},
       },
 
       {
@@ -210,31 +231,11 @@ module.exports = class EventsDBApi {
       {
         model: db.users,
         as: 'guests',
-        through: filter.guests
-          ? {
-              where: {
-                [Op.or]: filter.guests.split('|').map((item) => {
-                  return { ['Id']: Utils.uuid(item) };
-                }),
-              },
-            }
-          : null,
-        required: filter.guests ? true : null,
       },
 
       {
         model: db.users,
         as: 'vendors',
-        through: filter.vendors
-          ? {
-              where: {
-                [Op.or]: filter.vendors.split('|').map((item) => {
-                  return { ['Id']: Utils.uuid(item) };
-                }),
-              },
-            }
-          : null,
-        required: filter.vendors ? true : null,
       },
     ];
 
@@ -331,17 +332,6 @@ module.exports = class EventsDBApi {
         };
       }
 
-      if (filter.venue) {
-        const listItems = filter.venue.split('|').map((item) => {
-          return Utils.uuid(item);
-        });
-
-        where = {
-          ...where,
-          venueId: { [Op.or]: listItems },
-        };
-      }
-
       if (filter.organization) {
         const listItems = filter.organization.split('|').map((item) => {
           return Utils.uuid(item);
@@ -351,6 +341,70 @@ module.exports = class EventsDBApi {
           ...where,
           organizationId: { [Op.or]: listItems },
         };
+      }
+
+      if (filter.guests) {
+        const searchTerms = filter.guests.split('|');
+
+        include = [
+          {
+            model: db.users,
+            as: 'guests_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        firstName: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
+      }
+
+      if (filter.vendors) {
+        const searchTerms = filter.vendors.split('|');
+
+        include = [
+          {
+            model: db.users,
+            as: 'vendors_filter',
+            required: searchTerms.length > 0,
+            where:
+              searchTerms.length > 0
+                ? {
+                    [Op.or]: [
+                      {
+                        id: {
+                          [Op.in]: searchTerms.map((term) => Utils.uuid(term)),
+                        },
+                      },
+                      {
+                        firstName: {
+                          [Op.or]: searchTerms.map((term) => ({
+                            [Op.iLike]: `%${term}%`,
+                          })),
+                        },
+                      },
+                    ],
+                  }
+                : undefined,
+          },
+          ...include,
+        ];
       }
 
       if (filter.createdAtRange) {

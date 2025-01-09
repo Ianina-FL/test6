@@ -309,6 +309,8 @@ const OrganizationsView = () => {
                       <th>Capacity</th>
 
                       <th>IsBooked</th>
+
+                      <th>Address</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -330,6 +332,8 @@ const OrganizationsView = () => {
                           <td data-label='is_booked'>
                             {dataFormatter.booleanFormatter(item.is_booked)}
                           </td>
+
+                          <td data-label='address'>{item.address}</td>
                         </tr>
                       ))}
                   </tbody>

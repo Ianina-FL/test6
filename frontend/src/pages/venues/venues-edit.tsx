@@ -47,6 +47,8 @@ const EditVenuesPage = () => {
     is_booked: false,
 
     organization: '',
+
+    address: '',
   };
   const [initialValues, setInitialValues] = useState(initVals);
 
@@ -135,6 +137,10 @@ const EditVenuesPage = () => {
                   ></Field>
                 </FormField>
               )}
+
+              <FormField label='Address'>
+                <Field name='address' placeholder='Address' />
+              </FormField>
 
               <BaseDivider />
               <BaseButtons>

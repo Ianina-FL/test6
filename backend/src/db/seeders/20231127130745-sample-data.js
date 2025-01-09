@@ -15,23 +15,11 @@ const Organizations = db.organizations;
 
 const BudgetsData = [
   {
-    total_budget: 43.72,
+    total_budget: 29.98,
 
-    expenses: 39.57,
+    expenses: 81.31,
 
-    income: 39.23,
-
-    // type code here for "relation_many" field
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    total_budget: 75.34,
-
-    expenses: 86.45,
-
-    income: 82.61,
+    income: 97.48,
 
     // type code here for "relation_many" field
 
@@ -39,11 +27,23 @@ const BudgetsData = [
   },
 
   {
-    total_budget: 66.77,
+    total_budget: 23.67,
 
-    expenses: 49.97,
+    expenses: 93.01,
 
-    income: 89.36,
+    income: 37.53,
+
+    // type code here for "relation_many" field
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    total_budget: 92.53,
+
+    expenses: 70.09,
+
+    income: 96.68,
 
     // type code here for "relation_many" field
 
@@ -53,7 +53,23 @@ const BudgetsData = [
 
 const EventsData = [
   {
-    title: 'Jonas Salk',
+    title: 'Ludwig Boltzmann',
+
+    start_date: new Date(),
+
+    end_date: new Date(),
+
+    // type code here for "relation_one" field
+
+    // type code here for "relation_many" field
+
+    // type code here for "relation_many" field
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    title: 'Hermann von Helmholtz',
 
     start_date: new Date(),
 
@@ -83,37 +99,11 @@ const EventsData = [
 
     // type code here for "relation_one" field
   },
-
-  {
-    title: 'Albrecht von Haller',
-
-    start_date: new Date(),
-
-    end_date: new Date(),
-
-    // type code here for "relation_one" field
-
-    // type code here for "relation_many" field
-
-    // type code here for "relation_many" field
-
-    // type code here for "relation_one" field
-  },
 ];
 
 const GuestsData = [
   {
-    name: 'Leonard Euler',
-
-    meal_preference: 'Vegan',
-
-    rsvp_status: true,
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    name: 'John Dalton',
+    name: 'Michael Faraday',
 
     meal_preference: 'Vegetarian',
 
@@ -123,11 +113,21 @@ const GuestsData = [
   },
 
   {
-    name: 'Alfred Kinsey',
+    name: 'Edward Teller',
 
-    meal_preference: 'Vegan',
+    meal_preference: 'Vegetarian',
 
     rsvp_status: false,
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    name: 'Richard Feynman',
+
+    meal_preference: 'Vegetarian',
+
+    rsvp_status: true,
 
     // type code here for "relation_one" field
   },
@@ -135,31 +135,31 @@ const GuestsData = [
 
 const VendorsData = [
   {
-    name: 'Linus Pauling',
+    name: 'Louis Pasteur',
 
-    contact_info: 'James Watson',
+    contact_info: 'Louis Victor de Broglie',
 
-    rating: 21.74,
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    name: 'Claude Bernard',
-
-    contact_info: 'Marie Curie',
-
-    rating: 77.07,
+    rating: 98.54,
 
     // type code here for "relation_one" field
   },
 
   {
-    name: 'George Gaylord Simpson',
+    name: 'Comte de Buffon',
 
-    contact_info: 'Thomas Hunt Morgan',
+    contact_info: 'Willard Libby',
 
-    rating: 53.26,
+    rating: 79.88,
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    name: 'Hans Selye',
+
+    contact_info: 'Jean Baptiste Lamarck',
+
+    rating: 74.77,
 
     // type code here for "relation_one" field
   },
@@ -167,53 +167,59 @@ const VendorsData = [
 
 const VenuesData = [
   {
-    name: 'Alexander Fleming',
+    name: 'J. Robert Oppenheimer',
 
-    location: 'Edwin Hubble',
+    location: 'William Bayliss',
 
-    capacity: 8,
+    capacity: 4,
 
     is_booked: true,
 
     // type code here for "relation_one" field
+
+    address: 'Johannes Kepler',
   },
 
   {
-    name: 'Ernst Haeckel',
+    name: 'Enrico Fermi',
 
-    location: 'Ludwig Boltzmann',
+    location: 'Stephen Hawking',
 
-    capacity: 4,
+    capacity: 3,
 
     is_booked: false,
 
     // type code here for "relation_one" field
+
+    address: 'Frederick Sanger',
   },
 
   {
-    name: 'Karl Landsteiner',
+    name: 'John Bardeen',
 
-    location: 'Jonas Salk',
+    location: 'August Kekule',
 
-    capacity: 5,
+    capacity: 9,
 
     is_booked: false,
 
     // type code here for "relation_one" field
+
+    address: 'Dmitri Mendeleev',
   },
 ];
 
 const OrganizationsData = [
   {
-    name: 'William Harvey',
+    name: 'Hermann von Helmholtz',
   },
 
   {
-    name: 'Theodosius Dobzhansky',
+    name: 'Emil Kraepelin',
   },
 
   {
-    name: 'Frederick Gowland Hopkins',
+    name: 'Marcello Malpighi',
   },
 ];
 

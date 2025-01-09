@@ -125,13 +125,27 @@ const TableSampleOrganizations = ({
   const generateFilterRequests = useMemo(() => {
     let request = '&';
     filterItems.forEach((item) => {
-      filters.find(
+      const isRangeFilter = filters.find(
         (filter) =>
           filter.title === item.fields.selectedField &&
           (filter.number || filter.date),
-      )
-        ? (request += `${item.fields.selectedField}Range=${item.fields.filterValueFrom}&${item.fields.selectedField}Range=${item.fields.filterValueTo}&`)
-        : (request += `${item.fields.selectedField}=${item.fields.filterValue}&`);
+      );
+
+      if (isRangeFilter) {
+        const from = item.fields.filterValueFrom;
+        const to = item.fields.filterValueTo;
+        if (from) {
+          request += `${item.fields.selectedField}Range=${from}&`;
+        }
+        if (to) {
+          request += `${item.fields.selectedField}Range=${to}&`;
+        }
+      } else {
+        const value = item.fields.filterValue;
+        if (value) {
+          request += `${item.fields.selectedField}=${value}&`;
+        }
+      }
     });
     return request;
   }, [filterItems, filters]);
@@ -156,11 +170,12 @@ const TableSampleOrganizations = ({
     const name = e.target.name;
 
     setFilterItems(
-      filterItems.map((item) =>
-        item.id === id
-          ? { id, fields: { ...item.fields, [name]: value } }
-          : item,
-      ),
+      filterItems.map((item) => {
+        if (item.id !== id) return item;
+        if (name === 'selectedField') return { id, fields: { [name]: value } };
+
+        return { id, fields: { ...item.fields, [name]: value } };
+      }),
     );
   };
 
@@ -286,7 +301,7 @@ const TableSampleOrganizations = ({
                             name='selectedField'
                             id='selectedField'
                             component='select'
-                            value={filterItem?.fields?.selectedField}
+                            value={filterItem?.fields?.selectedField || ''}
                             onChange={handleChange(filterItem.id)}
                           >
                             {filters.map((selectOption) => (
@@ -308,6 +323,7 @@ const TableSampleOrganizations = ({
                             <Field
                               className={controlClasses}
                               name='filterValue'
+                              id='filterValue'
                               component='select'
                               value={filterItem?.fields?.filterValue || ''}
                               onChange={handleChange(filterItem.id)}
@@ -341,6 +357,9 @@ const TableSampleOrganizations = ({
                                 name='filterValueFrom'
                                 placeholder='From'
                                 id='filterValueFrom'
+                                value={
+                                  filterItem?.fields?.filterValueFrom || ''
+                                }
                                 onChange={handleChange(filterItem.id)}
                               />
                             </div>
@@ -353,6 +372,7 @@ const TableSampleOrganizations = ({
                                 name='filterValueTo'
                                 placeholder='to'
                                 id='filterValueTo'
+                                value={filterItem?.fields?.filterValueTo || ''}
                                 onChange={handleChange(filterItem.id)}
                               />
                             </div>
@@ -373,6 +393,9 @@ const TableSampleOrganizations = ({
                                 placeholder='From'
                                 id='filterValueFrom'
                                 type='datetime-local'
+                                value={
+                                  filterItem?.fields?.filterValueFrom || ''
+                                }
                                 onChange={handleChange(filterItem.id)}
                               />
                             </div>
@@ -386,6 +409,7 @@ const TableSampleOrganizations = ({
                                 placeholder='to'
                                 id='filterValueTo'
                                 type='datetime-local'
+                                value={filterItem?.fields?.filterValueTo || ''}
                                 onChange={handleChange(filterItem.id)}
                               />
                             </div>
@@ -400,6 +424,7 @@ const TableSampleOrganizations = ({
                               name='filterValue'
                               placeholder='Contained'
                               id='filterValue'
+                              value={filterItem?.fields?.filterValue || ''}
                               onChange={handleChange(filterItem.id)}
                             />
                           </div>

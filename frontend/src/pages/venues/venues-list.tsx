@@ -31,6 +31,7 @@ const VenuesTablesPage = () => {
   const [filters] = useState([
     { label: 'VenueName', title: 'name' },
     { label: 'Location', title: 'location' },
+    { label: 'Address', title: 'address' },
     { label: 'Capacity', title: 'capacity', number: 'true' },
   ]);
 
