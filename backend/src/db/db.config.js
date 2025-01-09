@@ -1,11 +1,11 @@
 module.exports = {
   production: {
     dialect: 'postgres',
-    username: process.env.DB_USER,
-    password: process.env.DB_PASS,
+    username: "postgres.xksxqwxansadeumntmwr",
+    password: "Owner123",
     database: process.env.DB_NAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+    host: "aws-0-eu-central-1.pooler.supabase.com",
+    port: 6543,
     logging: console.log,
     seederStorage: 'sequelize',
   },
