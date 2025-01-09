@@ -4,7 +4,7 @@ module.exports = {
     dialect: 'postgres',
     username: 'postgres.xksxqwxansadeumntmwr',
     password: 'Owner123',
-    database: process.env.DB_NAME,
+    database: 'postgres',
     host: 'aws-0-eu-central-1.pooler.supabase.com',
     port: 6543,
     logging: console.log,
