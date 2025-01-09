@@ -193,7 +193,7 @@ export default function WebSite() {
         <FeaturesSection
           projectName={'test6'}
           image={['Efficient event planning tools']}
-          withBg={0}
+          withBg={1}
           features={features_points}
           mainText={`Discover ${projectName} Core Features`}
           subTitle={`Enhance your event planning experience with ${projectName}. Our features are designed to simplify and streamline every aspect of your event.`}
@@ -202,7 +202,7 @@ export default function WebSite() {
 
         <PricingSection
           projectName={'test6'}
-          withBg={1}
+          withBg={0}
           features={pricing_features}
           description={description}
         />

@@ -352,6 +352,7 @@ module.exports = class BudgetsDBApi {
       ? {
           rows: [],
           count: await db.budgets.count({
+            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -365,6 +366,7 @@ module.exports = class BudgetsDBApi {
           }),
         }
       : await db.budgets.findAndCountAll({
+          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -376,6 +378,11 @@ module.exports = class BudgetsDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

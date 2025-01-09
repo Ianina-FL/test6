@@ -17,8 +17,10 @@ export const SelectField = ({
     if (options?.id && field?.value?.id) {
       setValue({ value: field.value?.id, label: field.value[showField] });
       form.setFieldValue(field.name, field.value?.id);
+    } else if (!field.value) {
+      setValue(null);
     }
-  }, [options?.id, field?.value?.id]);
+  }, [options?.id, field?.value?.id, field?.value]);
 
   const mapResponseToValuesAndLabels = (data) => ({
     value: data.id,

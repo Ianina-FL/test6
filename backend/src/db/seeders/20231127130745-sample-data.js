@@ -15,23 +15,11 @@ const Organizations = db.organizations;
 
 const BudgetsData = [
   {
-    total_budget: 83.66,
+    total_budget: 29.98,
 
-    expenses: 43.11,
+    expenses: 81.31,
 
-    income: 86.75,
-
-    // type code here for "relation_many" field
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    total_budget: 56.32,
-
-    expenses: 83.08,
-
-    income: 54.93,
+    income: 97.48,
 
     // type code here for "relation_many" field
 
@@ -39,11 +27,23 @@ const BudgetsData = [
   },
 
   {
-    total_budget: 20.98,
+    total_budget: 23.67,
 
-    expenses: 69.18,
+    expenses: 93.01,
 
-    income: 66.34,
+    income: 37.53,
+
+    // type code here for "relation_many" field
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    total_budget: 92.53,
+
+    expenses: 70.09,
+
+    income: 96.68,
 
     // type code here for "relation_many" field
 
@@ -53,7 +53,7 @@ const BudgetsData = [
 
 const EventsData = [
   {
-    title: 'Anton van Leeuwenhoek',
+    title: 'Ludwig Boltzmann',
 
     start_date: new Date(),
 
@@ -69,7 +69,7 @@ const EventsData = [
   },
 
   {
-    title: 'Arthur Eddington',
+    title: 'Hermann von Helmholtz',
 
     start_date: new Date(),
 
@@ -85,7 +85,7 @@ const EventsData = [
   },
 
   {
-    title: 'B. F. Skinner',
+    title: 'Wilhelm Wundt',
 
     start_date: new Date(),
 
@@ -103,9 +103,19 @@ const EventsData = [
 
 const GuestsData = [
   {
-    name: 'Jean Piaget',
+    name: 'Michael Faraday',
 
-    meal_preference: 'Vegan',
+    meal_preference: 'Vegetarian',
+
+    rsvp_status: true,
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    name: 'Edward Teller',
+
+    meal_preference: 'Vegetarian',
 
     rsvp_status: false,
 
@@ -113,21 +123,11 @@ const GuestsData = [
   },
 
   {
-    name: 'Jean Baptiste Lamarck',
+    name: 'Richard Feynman',
 
-    meal_preference: 'Non-Vegetarian',
+    meal_preference: 'Vegetarian',
 
-    rsvp_status: false,
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    name: 'Archimedes',
-
-    meal_preference: 'Vegan',
-
-    rsvp_status: false,
+    rsvp_status: true,
 
     // type code here for "relation_one" field
   },
@@ -135,31 +135,31 @@ const GuestsData = [
 
 const VendorsData = [
   {
-    name: 'Jean Baptiste Lamarck',
+    name: 'Louis Pasteur',
+
+    contact_info: 'Louis Victor de Broglie',
+
+    rating: 98.54,
+
+    // type code here for "relation_one" field
+  },
+
+  {
+    name: 'Comte de Buffon',
 
     contact_info: 'Willard Libby',
 
-    rating: 76.17,
+    rating: 79.88,
 
     // type code here for "relation_one" field
   },
 
   {
-    name: 'Willard Libby',
+    name: 'Hans Selye',
 
-    contact_info: 'Wilhelm Wundt',
+    contact_info: 'Jean Baptiste Lamarck',
 
-    rating: 45.81,
-
-    // type code here for "relation_one" field
-  },
-
-  {
-    name: 'Arthur Eddington',
-
-    contact_info: 'Isaac Newton',
-
-    rating: 51.32,
+    rating: 74.77,
 
     // type code here for "relation_one" field
   },
@@ -167,37 +167,37 @@ const VendorsData = [
 
 const VenuesData = [
   {
-    name: 'Gregor Mendel',
+    name: 'J. Robert Oppenheimer',
 
-    location: 'Max Delbruck',
+    location: 'William Bayliss',
 
-    capacity: 5,
+    capacity: 4,
 
     is_booked: true,
 
     // type code here for "relation_one" field
 
-    address: 'Jonas Salk',
+    address: 'Johannes Kepler',
   },
 
   {
-    name: 'Sigmund Freud',
+    name: 'Enrico Fermi',
 
-    location: 'Werner Heisenberg',
+    location: 'Stephen Hawking',
 
     capacity: 3,
 
-    is_booked: true,
+    is_booked: false,
 
     // type code here for "relation_one" field
 
-    address: 'James Clerk Maxwell',
+    address: 'Frederick Sanger',
   },
 
   {
-    name: 'Claude Levi-Strauss',
+    name: 'John Bardeen',
 
-    location: 'Theodosius Dobzhansky',
+    location: 'August Kekule',
 
     capacity: 9,
 
@@ -205,21 +205,21 @@ const VenuesData = [
 
     // type code here for "relation_one" field
 
-    address: 'Alexander Fleming',
+    address: 'Dmitri Mendeleev',
   },
 ];
 
 const OrganizationsData = [
   {
-    name: 'James Clerk Maxwell',
+    name: 'Hermann von Helmholtz',
   },
 
   {
-    name: 'Lucretius',
+    name: 'Emil Kraepelin',
   },
 
   {
-    name: 'Emil Fischer',
+    name: 'Marcello Malpighi',
   },
 ];
 

@@ -255,6 +255,7 @@ module.exports = class GuestsDBApi {
       ? {
           rows: [],
           count: await db.guests.count({
+            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -268,6 +269,7 @@ module.exports = class GuestsDBApi {
           }),
         }
       : await db.guests.findAndCountAll({
+          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -279,6 +281,11 @@ module.exports = class GuestsDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

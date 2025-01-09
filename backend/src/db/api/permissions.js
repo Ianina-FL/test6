@@ -203,6 +203,7 @@ module.exports = class PermissionsDBApi {
           rows: [],
           count: await db.permissions.count({
             where,
+            where,
             include,
             distinct: true,
             limit: limit ? Number(limit) : undefined,
@@ -216,6 +217,7 @@ module.exports = class PermissionsDBApi {
         }
       : await db.permissions.findAndCountAll({
           where,
+          where,
           include,
           distinct: true,
           limit: limit ? Number(limit) : undefined,
@@ -226,6 +228,11 @@ module.exports = class PermissionsDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

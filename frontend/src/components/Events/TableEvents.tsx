@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
 import BaseButton from '../BaseButton';
 import CardBoxModal from '../CardBoxModal';
 import CardBox from '../CardBox';

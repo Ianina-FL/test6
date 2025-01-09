@@ -18,6 +18,8 @@ export const SelectFieldMany = ({
         field.name,
         field.value.map((el) => el.id),
       );
+    } else if (!field.value || field.value.length === 0) {
+      setValue([]);
     }
   }, [field.name, field.value, form]);
 

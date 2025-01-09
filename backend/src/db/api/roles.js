@@ -284,6 +284,7 @@ module.exports = class RolesDBApi {
           rows: [],
           count: await db.roles.count({
             where,
+            where,
             include,
             distinct: true,
             limit: limit ? Number(limit) : undefined,
@@ -297,6 +298,7 @@ module.exports = class RolesDBApi {
         }
       : await db.roles.findAndCountAll({
           where,
+          where,
           include,
           distinct: true,
           limit: limit ? Number(limit) : undefined,
@@ -307,6 +309,11 @@ module.exports = class RolesDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

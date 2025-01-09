@@ -172,7 +172,7 @@ export default function WebSite() {
         <FeaturesSection
           projectName={'test6'}
           image={['Streamlined event management tools']}
-          withBg={1}
+          withBg={0}
           features={features_points}
           mainText={`Explore ${projectName} Key Features`}
           subTitle={`Unlock the full potential of your events with ${projectName}. Streamline planning, coordination, and management effortlessly.`}

@@ -560,6 +560,7 @@ module.exports = class UsersDBApi {
       ? {
           rows: [],
           count: await db.users.count({
+            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -573,6 +574,7 @@ module.exports = class UsersDBApi {
           }),
         }
       : await db.users.findAndCountAll({
+          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -584,6 +586,11 @@ module.exports = class UsersDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

@@ -296,6 +296,7 @@ module.exports = class VenuesDBApi {
       ? {
           rows: [],
           count: await db.venues.count({
+            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -309,6 +310,7 @@ module.exports = class VenuesDBApi {
           }),
         }
       : await db.venues.findAndCountAll({
+          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -320,6 +322,11 @@ module.exports = class VenuesDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

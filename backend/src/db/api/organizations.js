@@ -234,6 +234,7 @@ module.exports = class OrganizationsDBApi {
       ? {
           rows: [],
           count: await db.organizations.count({
+            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -247,6 +248,7 @@ module.exports = class OrganizationsDBApi {
           }),
         }
       : await db.organizations.findAndCountAll({
+          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -258,6 +260,11 @@ module.exports = class OrganizationsDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }

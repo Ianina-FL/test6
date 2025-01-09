@@ -440,6 +440,7 @@ module.exports = class EventsDBApi {
       ? {
           rows: [],
           count: await db.events.count({
+            where: globalAccess ? {} : where,
             where,
             include,
             distinct: true,
@@ -453,6 +454,7 @@ module.exports = class EventsDBApi {
           }),
         }
       : await db.events.findAndCountAll({
+          where: globalAccess ? {} : where,
           where,
           include,
           distinct: true,
@@ -464,6 +466,11 @@ module.exports = class EventsDBApi {
               : [['createdAt', 'desc']],
           transaction,
         });
+
+    //    rows = await this._fillWithRelationsAndFilesForRows(
+    //      rows,
+    //      options,
+    //    );
 
     return { rows, count };
   }
