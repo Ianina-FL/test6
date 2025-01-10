@@ -1,6 +1,5 @@
 module.exports = {
   production: {
-    pool_mode: 'transaction',
     dialect: 'postgres',
     username: 'postgres.xksxqwxansadeumntmwr',
     password: 'Owner123',
